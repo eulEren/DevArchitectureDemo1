@@ -34,7 +34,7 @@ namespace Business.Handlers.Colors.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<IEnumerable<Color>>> Handle(GetColorsQuery request, CancellationToken cancellationToken)
             {
-                return new SuccessDataResult<IEnumerable<Color>>(await _colorRepository.GetListAsync());
+                return new SuccessDataResult<IEnumerable<Color>>(await _colorRepository.GetListAsync(c => !c.IsDeleted));
             }
         }
     }

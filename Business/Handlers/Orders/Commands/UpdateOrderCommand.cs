@@ -49,21 +49,21 @@ namespace Business.Handlers.Orders.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
             {
-                var isThereOrderRecord = await _orderRepository.GetAsync(u => u.Id == request.Id);
+                var orderToUpdate = await _orderRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereOrderRecord.CreatedUserId = request.CreatedUserId;
-                isThereOrderRecord.CreatedDate = request.CreatedDate;
-                isThereOrderRecord.LastUpdatedUserId = request.LastUpdatedUserId;
-                isThereOrderRecord.LastUpdatedDate = request.LastUpdatedDate;
-                isThereOrderRecord.Status = request.Status;
-                isThereOrderRecord.IsDeleted = request.IsDeleted;
-                isThereOrderRecord.CustomerId = request.CustomerId;
-                isThereOrderRecord.ProductId = request.ProductId;
-                isThereOrderRecord.Quantity = request.Quantity;
+                orderToUpdate.CreatedUserId = request.CreatedUserId;
+                orderToUpdate.CreatedDate = request.CreatedDate;
+                orderToUpdate.LastUpdatedUserId = request.LastUpdatedUserId;
+                orderToUpdate.LastUpdatedDate = request.LastUpdatedDate;
+                orderToUpdate.Status = request.Status;
+                orderToUpdate.IsDeleted = request.IsDeleted;
+                orderToUpdate.CustomerId = request.CustomerId;
+                orderToUpdate.ProductId = request.ProductId;
+                orderToUpdate.Quantity = request.Quantity;
 
 
-                _orderRepository.Update(isThereOrderRecord);
+                _orderRepository.Update(orderToUpdate);
                 await _orderRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Updated);
             }

@@ -34,7 +34,7 @@ namespace Business.Handlers.Stocks.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<IEnumerable<Stock>>> Handle(GetStocksQuery request, CancellationToken cancellationToken)
             {
-                return new SuccessDataResult<IEnumerable<Stock>>(await _stockRepository.GetListAsync());
+                return new SuccessDataResult<IEnumerable<Stock>>(await _stockRepository.GetListAsync(s => !s.IsDeleted));
             }
         }
     }
