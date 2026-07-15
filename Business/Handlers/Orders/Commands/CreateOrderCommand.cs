@@ -37,10 +37,12 @@ namespace Business.Handlers.Orders.Commands
         {
             private readonly IOrderRepository _orderRepository;
             private readonly IMediator _mediator;
-            public CreateOrderCommandHandler(IOrderRepository orderRepository, IMediator mediator)
+            private readonly IStockRepository _stockRepository;
+            public CreateOrderCommandHandler(IOrderRepository orderRepository, IMediator mediator, IStockRepository stockRepository)
             {
                 _orderRepository = orderRepository;
                 _mediator = mediator;
+                _stockRepository = stockRepository;
             }
 
             [ValidationAspect(typeof(CreateOrderValidator), Priority = 1)]
@@ -49,10 +51,19 @@ namespace Business.Handlers.Orders.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
             {
-                var isThereOrderRecord = _orderRepository.Query().Any(u => u.CreatedUserId == request.CreatedUserId);
+                //var isThereOrderRecord = _orderRepository.Query().Any(u => u.CreatedUserId == request.CreatedUserId);
 
-                if (isThereOrderRecord == true)
-                    return new ErrorResult(Messages.NameAlreadyExist);
+                //if (isThereOrderRecord == true)
+                //    return new ErrorResult(Messages.NameAlreadyExist); aynı siparişten bir tane daha var mı  varsa error döndürür saçma 2 tane almak isteyebilirim
+                var stock = _stockRepository.Query().SingleOrDefault(s => s.ProductId == request.ProductId && !s.IsDeleted);
+
+                if (stock == null || stock.Quantity<request.Quantity)
+                {
+                    return new ErrorResult(Messages.OutOfStock);
+                }
+
+                stock.Quantity -= request.Quantity;
+                _stockRepository.Update(stock);
 
                 var addedOrder = new Order
                 {

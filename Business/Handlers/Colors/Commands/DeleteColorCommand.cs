@@ -1,11 +1,12 @@
 ﻿
+using Business.BusinessAspects;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
-using Business.BusinessAspects;
 using Core.Aspects.Autofac.Logging;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,7 +39,8 @@ namespace Business.Handlers.Colors.Commands
             {
                 var colorToDelete = _colorRepository.Get(p => p.Id == request.Id);
 
-                _colorRepository.Delete(colorToDelete);
+                colorToDelete.IsDeleted = true;
+                _colorRepository.Update(colorToDelete);
                 await _colorRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

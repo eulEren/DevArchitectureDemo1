@@ -1,11 +1,12 @@
 ﻿
+using Business.BusinessAspects;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
-using Business.BusinessAspects;
 using Core.Aspects.Autofac.Logging;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,7 +39,8 @@ namespace Business.Handlers.Customers.Commands
             {
                 var customerToDelete = _customerRepository.Get(p => p.Id == request.Id);
 
-                _customerRepository.Delete(customerToDelete);
+                customerToDelete.IsDeleted = true;
+                _customerRepository.Update(customerToDelete);
                 await _customerRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }
