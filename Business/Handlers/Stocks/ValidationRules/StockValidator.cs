@@ -29,7 +29,6 @@ namespace Business.Handlers.Stocks.ValidationRules
             RuleFor(x => x.LastUpdatedUserId).NotEmpty();
             RuleFor(x => x.LastUpdatedDate).NotEmpty();
             RuleFor(x => x.Status).NotEmpty();
-            RuleFor(x => x.IsDeleted).NotEmpty();
             RuleFor(x => x.ProductId).NotEmpty();
             RuleFor(x => x.Quantity).NotEmpty();
             RuleFor(x => x.IsReadyForSale).NotEmpty();

@@ -27,7 +27,6 @@ namespace Business.Handlers.Colors.ValidationRules
             RuleFor(x => x.LastUpdatedUserId).NotEmpty();
             RuleFor(x => x.LastUpdatedDate).NotEmpty();
             RuleFor(x => x.Status).NotEmpty();
-            RuleFor(x => x.IsDeleted).NotEmpty();
             RuleFor(x => x.Name).NotEmpty();
 
         }

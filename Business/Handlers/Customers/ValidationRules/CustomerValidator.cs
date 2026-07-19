@@ -31,7 +31,6 @@ namespace Business.Handlers.Customers.ValidationRules
             RuleFor(x => x.LastUpdatedUserId).NotEmpty();
             RuleFor(x => x.LastUpdatedDate).NotEmpty();
             RuleFor(x => x.Status).NotEmpty();
-            RuleFor(x => x.IsDeleted).NotEmpty();
             RuleFor(x => x.CustomerName).NotEmpty();
             RuleFor(x => x.CustomerCode).NotEmpty();
             RuleFor(x => x.Address).NotEmpty();
