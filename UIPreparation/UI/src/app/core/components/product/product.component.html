@@ -1,0 +1,55 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Ürünler</h4>
+    </div>
+
+    <div class="card-body">
+        <div>
+            <input type="text" [(ngModel)]="productName" placeholder="Ürün Adı">
+            <input type="number" [(ngModel)]="productColorId" placeholder="Renk ID">
+            <input type="text" [(ngModel)]="productSize" placeholder="Beden (Small/Medium/Large/XLarge)">
+
+            <button type="button" (click)="addProduct()">
+                Ürün Ekle
+            </button>
+
+            <button type="button" (click)="updateProduct()">
+                Ürünü Güncelle
+            </button>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ürün ID</th>
+                    <th>Ürün Adı</th>
+                    <th>Renk ID</th>
+                    <th>Beden Bilgisi</th>
+                    <th>Ürün İşlemleri</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td>{{product.id}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.colorId}}</td>
+                    <td>{{product.size}}</td>
+                    <td>
+                        <button type="button" (click)="selectProduct(product)">
+                            Ürünü Düzenle
+                        </button>
+
+                        <button type="button" (click)="deleteProduct(product)">
+                            Ürünü Sil
+                        </button>
+
+                        <button type="button" (click)="openColorDialog()">
+                            Renkleri Düzenle
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

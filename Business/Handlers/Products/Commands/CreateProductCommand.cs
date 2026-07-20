@@ -30,6 +30,7 @@ namespace Business.Handlers.Products.Commands
         public bool IsDeleted { get; set; }
         public string Name { get; set; }
         public int ColorId { get; set; }
+        public ProductSize Size { get; set; }
 
 
         public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, IResult>
@@ -48,7 +49,7 @@ namespace Business.Handlers.Products.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
             {
-                var isThereProductRecord = _productRepository.Query().Any(u => u.CreatedUserId == request.CreatedUserId);
+                var isThereProductRecord = _productRepository.Query().Any(u => u.Name == request.Name && !u.IsDeleted);
 
                 if (isThereProductRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
@@ -63,6 +64,7 @@ namespace Business.Handlers.Products.Commands
                     IsDeleted = request.IsDeleted,
                     Name = request.Name,
                     ColorId = request.ColorId,
+                    Size = request.Size,
 
                 };
 

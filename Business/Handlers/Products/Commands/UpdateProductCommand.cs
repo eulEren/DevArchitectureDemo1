@@ -30,6 +30,7 @@ namespace Business.Handlers.Products.Commands
         public bool IsDeleted { get; set; }
         public string Name { get; set; }
         public int ColorId { get; set; }
+        public ProductSize Size { get; set; }
 
         public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, IResult>
         {
@@ -59,6 +60,7 @@ namespace Business.Handlers.Products.Commands
                 isThereProductRecord.IsDeleted = request.IsDeleted;
                 isThereProductRecord.Name = request.Name;
                 isThereProductRecord.ColorId = request.ColorId;
+                isThereProductRecord.Size = request.Size;
 
 
                 _productRepository.Update(isThereProductRecord);

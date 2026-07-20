@@ -29,6 +29,9 @@ import { LogDtoComponent } from '../components/admin/log/logDto.component';
 import { MatSortModule } from '@angular/material/sort';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ColorComponent } from 'app/core/components/color/color.component';
+import { ProductComponent } from 'app/core/components/product/product.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CustomerComponent } from 'app/core/components/customer/customer.component';
 
 
 // export function layoutHttpLoaderFactory(http: HttpClient) {
@@ -52,6 +55,7 @@ import { ColorComponent } from 'app/core/components/color/color.component';
         MatPaginatorModule,
         MatSortModule,
         MatCheckboxModule,
+        MatDialogModule,
         NgbModule,
         NgMultiSelectDropDownModule,
         SweetAlert2Module,
@@ -73,7 +77,9 @@ import { ColorComponent } from 'app/core/components/color/color.component';
         TranslateComponent,
         OperationClaimComponent,
         LogDtoComponent,
-        ColorComponent
+        ColorComponent,
+        ProductComponent,
+        CustomerComponent
     ]
 })
 
