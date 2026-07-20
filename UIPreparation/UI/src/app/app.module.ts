@@ -56,7 +56,7 @@ export function tokenGetter() {
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
   ],
 
   providers: [

@@ -47,7 +47,7 @@ namespace Business.Handlers.Colors.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateColorCommand request, CancellationToken cancellationToken)
             {
-                var isThereColorRecord = _colorRepository.Query().Any(u => u.CreatedUserId == request.CreatedUserId);
+                var isThereColorRecord = _colorRepository.Query().Any(u => u.Name == request.Name && !u.IsDeleted);
 
                 if (isThereColorRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);

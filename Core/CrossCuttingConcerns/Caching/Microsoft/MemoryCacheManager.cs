@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ServiceStack.Text;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -19,6 +20,7 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
     public class MemoryCacheManager : ICacheManager
     {
         private readonly IMemoryCache _cache;
+        private readonly ConcurrentDictionary<string, byte> _keys = new();
 
         public MemoryCacheManager()
             : this(ServiceTool.ServiceProvider.GetService<IMemoryCache>())
@@ -33,11 +35,13 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
         public void Add(string key, object data, int duration)
         {
             _cache.Set(key, data, TimeSpan.FromMinutes(duration));
+            _keys.TryAdd(key, 0);
         }
 
         public void Add(string key, object data)
         {
             _cache.Set(key, data);
+            _keys.TryAdd(key, 0);
         }
 
         public void Add(string key, dynamic data, int duration, Type type)
@@ -81,39 +85,19 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
         public void Remove(string key)
         {
             _cache.Remove(key);
+            _keys.TryRemove(key, out _);
         }
 
         public void RemoveByPattern(string pattern)
         {
-            //var coherentState = typeof(MemoryCache).GetField("_coherentState", BindingFlags.NonPublic | BindingFlags.Instance);
+            var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var keysToRemove = _keys.Keys.Where(k => regex.IsMatch(k)).ToList();
 
-            //var coherentStateValue = coherentState.GetValue(_cache);
-            //var cacheEntriesCollectionDefinition = coherentStateValue.GetType().GetProperty("EntriesCollection", BindingFlags.NonPublic | BindingFlags.Instance);
-
-
-            //var cacheEntriesCollection = cacheEntriesCollectionDefinition.GetValue(coherentStateValue) as ICollection;
-
-            //var cacheCollectionValues = new List<string>();
-
-            //if (cacheEntriesCollection != null)
-            //{
-            //    foreach (var item in cacheEntriesCollection)
-            //    {
-            //        var methodInfo = item.GetType().GetProperty("Key");
-
-            //        var val = methodInfo.GetValue(item);
-
-            //        cacheCollectionValues.Add(val.ToString());
-            //    }
-            //}
-
-            //var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
-            //var keysToRemove = cacheCollectionValues.Where(d => regex.IsMatch(d)).Select(d => d)
-            //    .ToList();
-            //foreach (var key in keysToRemove)
-            //{
-            //    _cache.Remove(key);
-            //}
+            foreach (var key in keysToRemove)
+            {
+                _cache.Remove(key);
+                _keys.TryRemove(key, out _);
+            }
         }
     }
 }
