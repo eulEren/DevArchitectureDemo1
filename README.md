@@ -24,3 +24,6 @@ password: Kullanıcı123!
 
 ### Sipariş Raporu
 ![Sipariş Raporu](Order-Reports.png)
+
+### Rol Listesi
+![Rol Listesi](Group-List.png)
