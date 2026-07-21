@@ -29,7 +29,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'translate',      component: TranslateComponent,canActivate:[LoginGuard]},
     { path: 'operationclaim', component: OperationClaimComponent,canActivate:[LoginGuard]},
     { path: 'log', component: LogDtoComponent, canActivate: [LoginGuard] },
-    { path: 'color', component: ColorComponent, canActivate: [LoginGuard] },
     { path: 'product', component: ProductComponent, canActivate: [LoginGuard] },
     { path: 'customer', component: CustomerComponent, canActivate: [LoginGuard] },
     { path: 'stock', component: StockComponent, canActivate: [LoginGuard] },
