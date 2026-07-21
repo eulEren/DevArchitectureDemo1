@@ -17,6 +17,10 @@ import { AuthInterceptorService } from './core/interceptors/auth-interceptor.ser
 import { HttpEntityRepositoryService } from './core/services/http-entity-repository.service';
 import { ProductComponent } from './core/components/product/product.component';
 import { CustomerComponent } from './core/components/customer/customer.component';
+import { StockComponent } from './core/components/stock/stock.component';
+import { OrderComponent } from './core/components/order/order.component';
+import { WarehouseReportComponent } from './core/components/warehouse-report/warehouse-report.component';
+import { OrderReportComponent } from './core/components/order-report/order-report.component';
 
 
 // i18 kullanıclak ise aşağıdaki metod aktif edilecek

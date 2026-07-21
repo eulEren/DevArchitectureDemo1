@@ -5,6 +5,8 @@ import { AlertifyService } from 'app/core/services/alertify.service';
 import { AuthService } from '../admin/login/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ColorComponent } from 'app/core/components/color/color.component';
+import { Color } from 'app/core/models/color';
+import { ColorService } from 'app/core/services/color.service';
 
 @Component({
     selector: "app-product",
@@ -14,6 +16,7 @@ import { ColorComponent } from 'app/core/components/color/color.component';
 export class ProductComponent implements OnInit {
 
     products: Product[] = [];
+    colors: Color[] = [];
     productName: string = "";
     productColorId: number = 0;
     productSize: string = "";
@@ -23,11 +26,21 @@ export class ProductComponent implements OnInit {
         private productService: ProductService,
         private alertifyService: AlertifyService,
         private authService: AuthService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private colorService: ColorService
     ) { }
 
     ngOnInit(): void {
         this.getProducts();
+        this.getColors();
+    }
+
+    getColors() {
+        this.colorService.getColors().subscribe(data => {
+            this.colors = data;
+        }, error => {
+            this.alertifyService.error("Renkler getirilemedi");
+        });
     }
 
     getProducts() {
@@ -103,7 +116,16 @@ export class ProductComponent implements OnInit {
     }
 
     openColorDialog() {
-        this.dialog.open(ColorComponent);
+        var dialogRef = this.dialog.open(ColorComponent);
+
+        dialogRef.afterClosed().subscribe(() => {
+            this.getColors();
+        });
+    }
+
+    getColorName(colorId: number): string {
+        var color = this.colors.find(c => c.id == colorId);
+        return color ? color.name : "";
     }
 
 }

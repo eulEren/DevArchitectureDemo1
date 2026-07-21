@@ -49,11 +49,7 @@ namespace Business.Handlers.Stocks.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateStockCommand request, CancellationToken cancellationToken)
             {
-                var isThereStockRecord = _stockRepository.Query().Any(u => u.CreatedUserId == request.CreatedUserId);
-
-                if (isThereStockRecord == true)
-                    return new ErrorResult(Messages.NameAlreadyExist);
-
+                
                 var addedStock = new Stock
                 {
                     CreatedUserId = request.CreatedUserId,

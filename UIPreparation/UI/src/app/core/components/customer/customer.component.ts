@@ -110,5 +110,5 @@ export class CustomerComponent implements OnInit {
             this.alertifyService.error("Müşteri Silinemedi");
         });
     }
-
+        
 }

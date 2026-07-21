@@ -16,7 +16,6 @@ namespace Business.Handlers.Stocks.ValidationRules
             RuleFor(x => x.Status).NotEmpty();
             RuleFor(x => x.ProductId).NotEmpty();
             RuleFor(x => x.Quantity).NotEmpty();
-            RuleFor(x => x.IsReadyForSale).NotEmpty();
 
         }
     }
@@ -31,7 +30,6 @@ namespace Business.Handlers.Stocks.ValidationRules
             RuleFor(x => x.Status).NotEmpty();
             RuleFor(x => x.ProductId).NotEmpty();
             RuleFor(x => x.Quantity).NotEmpty();
-            RuleFor(x => x.IsReadyForSale).NotEmpty();
 
         }
     }

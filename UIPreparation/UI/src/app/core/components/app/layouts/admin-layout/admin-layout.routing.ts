@@ -11,6 +11,10 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { ColorComponent } from 'app/core/components/color/color.component';
 import { ProductComponent } from 'app/core/components/product/product.component';
 import { CustomerComponent } from 'app/core/components/customer/customer.component';
+import { StockComponent } from 'app/core/components/stock/stock.component';
+import { OrderComponent } from 'app/core/components/order/order.component';
+import { WarehouseReportComponent } from 'app/core/components/warehouse-report/warehouse-report.component';
+import { OrderReportComponent } from 'app/core/components/order-report/order-report.component';
 
 
 
@@ -27,6 +31,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'log', component: LogDtoComponent, canActivate: [LoginGuard] },
     { path: 'color', component: ColorComponent, canActivate: [LoginGuard] },
     { path: 'product', component: ProductComponent, canActivate: [LoginGuard] },
-    { path: 'customer', component: CustomerComponent, canActivate: [LoginGuard] }
+    { path: 'customer', component: CustomerComponent, canActivate: [LoginGuard] },
+    { path: 'stock', component: StockComponent, canActivate: [LoginGuard] },
+    { path: 'order', component: OrderComponent, canActivate: [LoginGuard] },
+    { path: 'warehouse-report', component: WarehouseReportComponent, canActivate: [LoginGuard] },
+    { path: 'order-report', component: OrderReportComponent, canActivate: [LoginGuard] }
     
 ];

@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Siparişler</h4>
+    </div>
+
+    <div class="card-body">
+        <div>
+            <select [(ngModel)]="orderCustomerId">
+                <option [value]="0">Müşteri Seçiniz</option>
+                <option *ngFor="let customer of customers" [value]="customer.id">{{customer.customerName}}</option>
+            </select>
+
+            <select [(ngModel)]="orderProductId">
+                <option [value]="0">Ürün Seçiniz</option>
+                <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+            </select>
+
+            <label>
+                Adet
+                <input type="number" [(ngModel)]="orderQuantity">
+            </label>
+
+            <button type="button" (click)="addOrder()">
+                Sipariş Ekle
+            </button>
+
+            <button type="button" (click)="updateOrder()">
+                Siparişi Güncelle
+            </button>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sipariş ID</th>
+                    <th>Müşteri</th>
+                    <th>Ürün</th>
+                    <th>Adet</th>
+                    <th>Sipariş İşlemleri</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>{{order.id}}</td>
+                    <td>{{getCustomerName(order.customerId)}}</td>
+                    <td>{{getProductName(order.productId)}}</td>
+                    <td>{{order.quantity}}</td>
+                    <td>
+                        <button type="button" (click)="selectOrder(order)">
+                            Siparişi Düzenle
+                        </button>
+
+                        <button type="button" (click)="deleteOrder(order)">
+                            Siparişi Sil
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -32,6 +32,10 @@ import { ColorComponent } from 'app/core/components/color/color.component';
 import { ProductComponent } from 'app/core/components/product/product.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CustomerComponent } from 'app/core/components/customer/customer.component';
+import { StockComponent } from 'app/core/components/stock/stock.component';
+import { OrderComponent } from 'app/core/components/order/order.component';
+import { WarehouseReportComponent } from 'app/core/components/warehouse-report/warehouse-report.component';
+import { OrderReportComponent } from 'app/core/components/order-report/order-report.component';
 
 
 // export function layoutHttpLoaderFactory(http: HttpClient) {
@@ -79,7 +83,11 @@ import { CustomerComponent } from 'app/core/components/customer/customer.compone
         LogDtoComponent,
         ColorComponent,
         ProductComponent,
-        CustomerComponent
+        CustomerComponent,
+        StockComponent,
+        OrderComponent,
+        WarehouseReportComponent,
+        OrderReportComponent
     ]
 })
 

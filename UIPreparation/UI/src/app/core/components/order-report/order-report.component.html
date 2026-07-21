@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="card-header">
+        <h4>Sipariş Raporu</h4>
+    </div>
+
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sipariş ID</th>
+                    <th>Müşteri</th>
+                    <th>Ürün</th>
+                    <th>Adet</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>{{order.id}}</td>
+                    <td>{{getCustomerName(order.customerId)}}</td>
+                    <td>{{getProductName(order.productId)}}</td>
+                    <td>{{order.quantity}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

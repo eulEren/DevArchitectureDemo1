@@ -6,8 +6,13 @@
     <div class="card-body">
         <div>
             <input type="text" [(ngModel)]="productName" placeholder="Ürün Adı">
-            <input type="number" [(ngModel)]="productColorId" placeholder="Renk ID">
-            <input type="text" [(ngModel)]="productSize" placeholder="Beden (Small/Medium/Large/XLarge)">
+
+            <select [(ngModel)]="productColorId">
+                <option [value]="0">Renk Seçiniz</option>
+                <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
+            </select>
+
+            <input type="text" [(ngModel)]="productSize" placeholder="Beden (1=Small/2=Medium/3=Large/4=XLarge)">
 
             <button type="button" (click)="addProduct()">
                 Ürün Ekle
@@ -16,6 +21,10 @@
             <button type="button" (click)="updateProduct()">
                 Ürünü Güncelle
             </button>
+
+            <button type="button" (click)="openColorDialog()">
+                Renkleri Düzenle
+            </button>
         </div>
 
         <table class="table">
@@ -23,7 +32,7 @@
                 <tr>
                     <th>Ürün ID</th>
                     <th>Ürün Adı</th>
-                    <th>Renk ID</th>
+                    <th>Renk</th>
                     <th>Beden Bilgisi</th>
                     <th>Ürün İşlemleri</th>
                 </tr>
@@ -33,7 +42,7 @@
                 <tr *ngFor="let product of products">
                     <td>{{product.id}}</td>
                     <td>{{product.name}}</td>
-                    <td>{{product.colorId}}</td>
+                    <td>{{getColorName(product.colorId)}}</td>
                     <td>{{product.size}}</td>
                     <td>
                         <button type="button" (click)="selectProduct(product)">
@@ -42,10 +51,6 @@
 
                         <button type="button" (click)="deleteProduct(product)">
                             Ürünü Sil
-                        </button>
-
-                        <button type="button" (click)="openColorDialog()">
-                            Renkleri Düzenle
                         </button>
                     </td>
                 </tr>
