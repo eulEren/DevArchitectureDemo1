@@ -4,9 +4,9 @@
       <div class="col-md-3 " ></div>
       <div class="col-md-4 ">
         <div class="card">
-          <div class="card-header card-header-danger">
+          <div class="card-header card-header-success">
             <h4 class="card-title">{{'Login' | translate}}</h4>
-            <p class="card-category">DEV ARCHITECTURE</p>
+            <p class="card-category">REAL SOLUTIONS</p>
           </div>
           <div class="card-body">
             <form (submit)="login()">
@@ -24,14 +24,7 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <select class="browser-default custom-select" placeholder="Seçiniz" name="lang" [(ngModel)]="loginUser.lang" (change)="changeLang($event.target.value)">
-                    <option *ngFor="let item of langugelookUp" [value]="item.id"> {{item.label}}</option>
-                  </select>
-                </div>
-              </div>
-              <button mat-raised-button type="submit" class="btn btn-danger pull-right">{{'Login'| translate}}</button>
+              <button mat-raised-button type="submit" class="btn btn-success pull-right">{{'Login'| translate}}</button>
               <div class="clearfix"></div>
             </form>
           </div>

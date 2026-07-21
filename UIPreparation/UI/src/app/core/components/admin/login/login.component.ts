@@ -17,22 +17,14 @@ export class LoginComponent implements OnInit {
 
   username:string="";
   loginUser:LoginUser=new LoginUser();
-  langugelookUp:LookUp[];
 
 
   constructor(private auth:AuthService,
-    private storageService:LocalStorageService,
-    private lookupService:LookUpService,
-    public translateService:TranslateService,
-    private httpClient:HttpClient) { }
+    private storageService:LocalStorageService) { }
 
   ngOnInit() {
 
     this.username=this.auth.userName;
-    this.httpClient.get<LookUp[]>(environment.getApiUrl +"/languages/codes").subscribe(data=>{
-      this.langugelookUp=data;
-    })
-    
   }
 
   getUserName(){
@@ -45,12 +37,6 @@ export class LoginComponent implements OnInit {
 
   logOut(){
       this.storageService.removeToken();
-      this.storageService.removeItem("lang");
-  }
-
-  changeLang(lang){  
-    localStorage.setItem("lang",lang);
-    this.translateService.use(lang);
   }
 
 }

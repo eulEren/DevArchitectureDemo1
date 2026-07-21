@@ -10,21 +10,21 @@ export class AuthInterceptorService implements HttpInterceptor {
   constructor(private tokenService:TokenService) {
 
   }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    req = this.addToken(req);
+       req = this.addToken(req);
 
-    return next.handle(req).pipe(
-      catchError((error) => {
-        if (error instanceof HttpErrorResponse && error.status === 401) {
-          return this.handle401Error(req,next);
-        } 
-        else {
-          return throwError(error);
-        }        
-      })
-    )
-  }
+       return next.handle(req).pipe(
+           catchError((error) => {
+               if (error instanceof HttpErrorResponse && error.status === 401 && !req.url.includes("/Auth/login")) {
+                   return this.handle401Error(req, next);
+                }
+               else {
+                   return throwError(error);
+               }
+           })
+       )
+    }
   private addToken(req:HttpRequest<any>){
     var lang = localStorage.getItem("lang") || "tr-TR"
     

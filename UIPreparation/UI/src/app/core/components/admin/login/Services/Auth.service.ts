@@ -36,16 +36,13 @@ export class AuthService {
 
         this.httpClient.post<TokenModel>(environment.getApiUrl + "/Auth/login", loginUser, { headers: headers }).subscribe(data => {
 
-
             if (data.success) {
 
                 this.storageService.setToken(data.data.token);
                 this.storageService.setItem("refreshToken", data.data.refreshToken)
                 this.claims = data.data.claims;
 
-
                 var decode = this.jwtHelper.decodeToken(this.storageService.getToken());
-
 
                 var propUserName = Object.keys(decode).filter(x => x.endsWith("/name"))[0];
                 this.userName = decode[propUserName];
@@ -57,7 +54,10 @@ export class AuthService {
                 this.alertifyService.warning(data.message);
             }
 
-        }
+        },
+            error => {
+                this.alertifyService.error("Email veya şifre hatalı");
+            }
         );
     }
     getUserName(): string {

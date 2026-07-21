@@ -8,7 +8,6 @@ import { TranslateComponent } from 'app/core/components/admin/translate/translat
 import { UserComponent } from 'app/core/components/admin/user/user.component';
 import { LoginGuard } from 'app/core/guards/login-guard';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { ColorComponent } from 'app/core/components/color/color.component';
 import { ProductComponent } from 'app/core/components/product/product.component';
 import { CustomerComponent } from 'app/core/components/customer/customer.component';
 import { StockComponent } from 'app/core/components/stock/stock.component';
