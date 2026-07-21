@@ -110,5 +110,9 @@ export class CustomerComponent implements OnInit {
             this.alertifyService.error("Müşteri Silinemedi");
         });
     }
+
+    checkClaim(claim: string): boolean {
+        return this.authService.claimGuard(claim);
+    }
         
 }

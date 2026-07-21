@@ -22,8 +22,11 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/log', title: 'Logs', icon: 'update', class: '', claim: "GetLogDtoQuery" }
 ];
 
-export const USERROUTES: RouteInfo[] = [ 
-  //{ path: '/log', title: 'Logs', icon: 'update', class: '', claim: "GetLogDtoQuery" }
+export const USERROUTES: RouteInfo[] = [
+    { path: '/customer', title: 'Customers', icon: 'people', class: '', claim: 'CreateCustomerCommand' },
+    { path: '/product', title: 'Products', icon: 'shopping_bag', class: '', claim: 'GetProductsQuery' },
+    { path: '/stock', title: 'Stocks', icon: 'inventory', class: '', claim: 'GetStocksQuery' },
+    { path: '/order', title: 'Orders', icon: 'receipt', class: '', claim: 'GetOrdersQuery' }
 ];
 
 @Component({

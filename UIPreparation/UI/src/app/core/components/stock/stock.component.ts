@@ -117,4 +117,8 @@ export class StockComponent implements OnInit {
         return product ? product.name : "Ürün silinmiş";
     }
 
+    checkClaim(claim: string): boolean {
+        return this.authService.claimGuard(claim);
+    }
+
 }

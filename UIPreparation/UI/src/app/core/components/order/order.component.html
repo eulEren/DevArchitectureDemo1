@@ -20,11 +20,11 @@
                 <input type="number" [(ngModel)]="orderQuantity">
             </label>
 
-            <button type="button" (click)="addOrder()">
+            <button *ngIf="checkClaim('CreateOrderCommand')" type="button" (click)="addOrder()">
                 Sipariş Ekle
             </button>
 
-            <button type="button" (click)="updateOrder()">
+            <button *ngIf="checkClaim('UpdateOrderCommand')" type="button" (click)="updateOrder()">
                 Siparişi Güncelle
             </button>
         </div>
@@ -47,11 +47,11 @@
                     <td>{{getProductName(order.productId)}}</td>
                     <td>{{order.quantity}}</td>
                     <td>
-                        <button type="button" (click)="selectOrder(order)">
+                        <button *ngIf="checkClaim('UpdateOrderCommand')" type="button" (click)="selectOrder(order)">
                             Siparişi Düzenle
                         </button>
 
-                        <button type="button" (click)="deleteOrder(order)">
+                        <button *ngIf="checkClaim('DeleteOrderCommand')" type="button" (click)="deleteOrder(order)">
                             Siparişi Sil
                         </button>
                     </td>

@@ -20,11 +20,11 @@
                 Satışa Hazır
             </label>
 
-            <button type="button" (click)="addStock()">
+            <button *ngIf="checkClaim('CreateStockCommand')" type="button" (click)="addStock()">
                 Stok Ekle
             </button>
 
-            <button type="button" (click)="updateStock()">
+            <button *ngIf="checkClaim('UpdateStockCommand')" type="button" (click)="updateStock()">
                 Stoğu Güncelle
             </button>
         </div>
@@ -47,11 +47,11 @@
                     <td>{{stock.quantity}}</td>
                     <td>{{stock.isReadyForSale ? "Evet" : "Hayır"}}</td>
                     <td>
-                        <button type="button" (click)="selectStock(stock)">
+                        <button *ngIf="checkClaim('UpdateStockCommand')" type="button" (click)="selectStock(stock)">
                             Stoğu Düzenle
                         </button>
 
-                        <button type="button" (click)="deleteStock(stock)">
+                        <button *ngIf="checkClaim('DeleteStockCommand')" type="button" (click)="deleteStock(stock)">
                             Stoğu Sil
                         </button>
                     </td>

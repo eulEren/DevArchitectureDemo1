@@ -86,4 +86,8 @@ export class ColorComponent implements OnInit {
             this.alertifyService.error("Renk silinemedi");
         });
     }
+
+    checkClaim(claim: string): boolean {
+        return this.authService.claimGuard(claim);
+    }
 }

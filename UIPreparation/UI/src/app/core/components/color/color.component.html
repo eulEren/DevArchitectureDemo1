@@ -7,11 +7,11 @@
         <div>
             <input type="text" [(ngModel)]="colorName" placeholder="Renk Adı">
 
-            <button type="button" (click)="addColor()">
+            <button *ngIf="checkClaim('CreateColorCommand')" type="button" (click)="addColor()">
                 Renk Ekle
             </button>
 
-            <button type="button" (click)="updateColor()">
+            <button *ngIf="checkClaim('UpdateColorCommand')" type="button" (click)="updateColor()">
                 Rengi Güncelle
             </button>
         </div>
@@ -30,11 +30,12 @@
                     <td>{{color.id}}</td>
                     <td>{{color.name}}</td>
                     <td>
-                        <button type="button" (click)="selectColor(color)">
+                        <button *ngIf="checkClaim('UpdateColorCommand')" type="button" (click)="selectColor(color)">
                             Rengi Düzenle
                         </button>
-                        <button type="button" (click)="deleteColor(color)">
-                            Sil
+
+                        <button *ngIf="checkClaim('DeleteColorCommand')" type="button" (click)="deleteColor(color)">
+                            Rengi Sil
                         </button>
                     </td>
                 </tr>

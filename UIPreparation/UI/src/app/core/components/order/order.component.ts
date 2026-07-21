@@ -135,4 +135,8 @@ export class OrderComponent implements OnInit {
         return product ? product.name : "Ürün Silinmiş";
     }
 
+    checkClaim(claim: string): boolean {
+        return this.authService.claimGuard(claim);
+    }
+
 }

@@ -11,12 +11,12 @@
             <input type="text" [(ngModel)]="phoneNumber" placeholder="Telefon No">
             <input type="text" [(ngModel)]="email" placeholder="E-mail">
 
-            <button type="button" (click)="addCustomer()">
+            <button *ngIf="checkClaim('CreateCustomerCommand')" type="button" (click)="addCustomer()">
                 Müşteri Ekle
             </button>
 
-            <button type="button" (click)="updateCustomer()">
-                Müşteri Güncelle
+            <button *ngIf="checkClaim('UpdateCustomerCommand')" type="button" (click)="updateCustomer()">
+                Müşteriyi Güncelle
             </button>
         </div>
 
@@ -42,12 +42,12 @@
                     <td>{{customer.phoneNumber}}</td>
                     <td>{{customer.email}}</td>
                     <td>
-                        <button type="button" (click)="selectCustomer(customer)">
-                            Müşteri Düzenle
+                        <button *ngIf="checkClaim('UpdateCustomerCommand')" type="button" (click)="selectCustomer(customer)">
+                            Müşteriyi Düzenle
                         </button>
 
-                        <button type="button" (click)="deleteCustomer(customer)">
-                            Müşteri Sil
+                        <button *ngIf="checkClaim('DeleteCustomerCommand')" type="button" (click)="deleteCustomer(customer)">
+                            Müşteriyi Sil
                         </button>
                     </td>
                 </tr>
