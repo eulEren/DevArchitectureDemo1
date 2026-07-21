@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
     productName: string = "";
     productColorId: number = 0;
     productSize: string = "";
+    productSizes: string[] = ["Small", "Medium", "Large", "XLarge"];
     selectedProduct: Product = new Product();
 
     constructor(

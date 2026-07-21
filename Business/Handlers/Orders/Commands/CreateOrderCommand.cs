@@ -1,5 +1,4 @@
-﻿
-using Business.BusinessAspects;
+﻿using Business.BusinessAspects;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logging;
@@ -16,9 +15,7 @@ using Business.Handlers.Orders.ValidationRules;
 
 namespace Business.Handlers.Orders.Commands
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     public class CreateOrderCommand : IRequest<IResult>
     {
 
@@ -57,7 +54,17 @@ namespace Business.Handlers.Orders.Commands
                 //    return new ErrorResult(Messages.NameAlreadyExist); aynı siparişten bir tane daha var mı  varsa error döndürür saçma 2 tane almak isteyebilirim
                 var stock = _stockRepository.Query().SingleOrDefault(s => s.ProductId == request.ProductId && !s.IsDeleted);
 
-                if (stock == null || stock.Quantity<request.Quantity)
+                if (stock == null)
+                {
+                    return new ErrorResult(Messages.OutOfStock);
+                }
+
+                if (!stock.IsReadyForSale)
+                {
+                    return new ErrorResult(Messages.NotReadyForSale);
+                }
+
+                if (stock.Quantity < request.Quantity)
                 {
                     return new ErrorResult(Messages.OutOfStock);
                 }

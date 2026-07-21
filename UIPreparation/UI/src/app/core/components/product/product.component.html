@@ -12,7 +12,10 @@
                 <option *ngFor="let color of colors" [value]="color.id">{{color.name}}</option>
             </select>
 
-            <input type="text" [(ngModel)]="productSize" placeholder="Beden (1=Small/2=Medium/3=Large/4=XLarge)">
+            <select [(ngModel)]="productSize">
+                <option [value]="''" disabled>Beden Seçiniz</option>
+                <option *ngFor="let size of productSizes" [value]="size">{{size}}</option>
+            </select>
 
             <button type="button" (click)="addProduct()">
                 Ürün Ekle
